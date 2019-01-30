@@ -6,23 +6,6 @@ import getUrlForecastByCity from './../services/getUrlForecastByCity';
 import ForecastItem from './ForecastItem';
 import './style.css';
 
-// const days = [
-//     'Lunes',
-//     'Martes',
-//     'Miercoles',
-//     'Jueves',
-//     'Viernes',
-//     'Sabado',
-//     'Domingo',
-// ]
-
-// const data = {
-//     temperature: 10,
-//     weatherState: 'Nommal',
-//     humidity: 10,
-//     wind: 'Nommal',
-// }
-
 class ForecastExtended extends Component {
 
     constructor(props) {
