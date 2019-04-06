@@ -16,14 +16,20 @@ const getWeatherCity = payload => ({ type: GET_WEATHER_CITY, payload });
 const setWeatherCity = payload => ({ type: SET_WEATHER_CITY, payload });
 
 export const setSelectedCity = value => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(setCity(value));
-        const api_forecast = getUrlForecastByCity(value)
+        const state = getState();
+        const date = state.cities[value] && state.cities[value].forecastDataDate
+        const now = new Date();
+        if(date && ((now - date) < (1 * 60 * 1000))){
+            return;
+        }
+        const api_forecast = getUrlForecastByCity(value);
         return fetch(api_forecast).then( 
             resolve => (resolve.json())
         ).then(data =>{
             const forecastData = transformForecast(data);
-            dispatch(setForecastData({city:value, forecastData}))
+            dispatch(setForecastData({city:value, forecastData}));
         });
     }
 };
